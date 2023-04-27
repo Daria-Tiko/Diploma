@@ -3,8 +3,13 @@ plugins {
     id 'io.freefair.lombok' version '5.2.1'
     id 'io.qameta.allure' version '2.9.6'
 }
+allure {
+    version = '2.16.1'
 
-
+    useJUnit5 {
+        version = '2.16.1'
+    }
+}
 
 group 'ru.netology'
 version '1.0-SNAPSHOT'
@@ -39,4 +44,5 @@ test {
     systemProperty 'db.url', System.getProperty('db.url', 'jdbc:mysql://192.168.99.100:3306/app')
     systemProperty 'db.user', System.getProperty('db.user', 'app')
     systemProperty 'db.pass', System.getProperty('db.pass', 'pass')
+    systemProperty 'sut.url', System.getProperty('sut.url', "http://localhost:8080/")
 }
