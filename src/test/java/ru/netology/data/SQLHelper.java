@@ -18,7 +18,7 @@ public class SQLHelper {
 
     // Подключение к БД
     @SneakyThrows
-    public static Connection getConn(){
+    public static Connection getConn() {
         return DriverManager.getConnection(url, "app", "pass");
     }
 
@@ -45,7 +45,7 @@ public class SQLHelper {
         return getResult(SqlStatus);
     }
 
-    //
+    // Статус
     @SneakyThrows
     private static String getResult(String query) {
         String result = "";

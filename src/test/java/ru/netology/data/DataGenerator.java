@@ -74,6 +74,7 @@ public class DataGenerator {
 
         return "4444444444444441";
     }
+
     public static String declinedCardNumber() {
 
         return "4444444444444442";
