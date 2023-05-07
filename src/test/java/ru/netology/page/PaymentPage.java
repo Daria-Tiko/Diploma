@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class PaymentPage {
     private final SelenideElement heading = $$("h3").find(text("Оплата по карте"));
-    private final SelenideElement cardNumberField =  $("[placeholder='0000 0000 0000 0000']");
+    private final SelenideElement cardNumberField = $("[placeholder='0000 0000 0000 0000']");
     private final SelenideElement monthField = $("[placeholder='08']");
     private final SelenideElement yearField = $("[placeholder='22']");
     private final SelenideElement holderField = $(byText("Владелец")).parent().$(".input__control");
@@ -38,7 +38,7 @@ public class PaymentPage {
         heading.shouldBe(visible);
     }
 
-    public void inputData (DataCard card) {
+    public void inputData(DataCard card) {
         cardNumberField.setValue(card.getNumber());
         monthField.setValue(card.getMonth());
         yearField.setValue(card.getYear());
@@ -54,10 +54,12 @@ public class PaymentPage {
         holderField.doubleClick().sendKeys(Keys.BACK_SPACE);
         cvcField.doubleClick().sendKeys(Keys.BACK_SPACE);
     }
+
     public PaymentPage clear() {
         clearFields();
         return new PaymentPage();
     }
+
     public void notificationSuccessIsVisible() {
         notificationSuccess.shouldBe(visible, Duration.ofSeconds(11));
     }

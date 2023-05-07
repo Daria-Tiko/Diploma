@@ -33,7 +33,7 @@ public class DataGenerator {
 
     //Прошедший месяц
     public static DataCard getValueLastMonth() {
-        return new DataCard(approvedCardNumber(), getValidMonth(), getValidYear(), getValidHolder(), getValidCode());
+        return new DataCard(approvedCardNumber(), getLastMonth(), getValidYear(), getValidHolder(), getValidCode());
     }
 
     //месяц значение "00"
@@ -59,6 +59,11 @@ public class DataGenerator {
     //Владелец только Имя En
     public static DataCard getOneValueEnHolder() {
         return new DataCard(approvedCardNumber(), getValidMonth(), getValidYear(), getEnHolder(), getValidCode());
+    }
+
+    //Владелец пустое поле
+    public static DataCard getEmptyHolderCard() {
+        return new DataCard(approvedCardNumber(), getValidMonth(), getValidYear(), "", getValidCode());
     }
 
     //CVC/CVV двузначное число
