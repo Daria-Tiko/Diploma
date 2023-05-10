@@ -136,4 +136,5 @@ public class PaymentTest {
         payment.inputData(DataGenerator.getValueInvalidCode());
         payment.waitForWrongFormatMessage();
     }
+
 }
