@@ -31,7 +31,7 @@
 2. Открыть проект в IntelliJ IDEA
 3. Запускаем контейнеры из файла docker-compose.yml командой в терминале
         
-       docker-compose up -d
+       docker-compose up --build
 
 4. Запускаем SUT командой в терминале:
    - для MySQL:

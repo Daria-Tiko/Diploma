@@ -38,7 +38,7 @@ public class CreditPage {
         heading.shouldBe(visible);
     }
 
-    public void InputData(DataCard card) {
+    public void inputData(DataCard card) {
         cardNumberField.setValue(card.getNumber());
         monthField.setValue(card.getMonth());
         yearField.setValue(card.getYear());

@@ -28,12 +28,6 @@ public class PaymentTest {
         open(url);
     }
 
-    // Очистка БД
-    @AfterEach
-    public void cleanBase() {
-        SQLHelper.cleanDatabase();
-    }
-
     // **Перечень сценариев для вкладки "Купить":**
 
     // Оплата картой approvedCardNumber

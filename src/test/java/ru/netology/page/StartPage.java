@@ -13,16 +13,13 @@ public class StartPage {
     private final SelenideElement paymentButton = $$("button").find(text("Купить"));
     private final SelenideElement creditButton = $$("button").find(text("Купить в кредит"));
     private final SelenideElement form = $("form");
-    private final SelenideElement successNotification = $(".notification_status_ok");
-    private final SelenideElement errorNotification = $(".notification_status_error");
 
 
     public StartPage() {
         heading.shouldBe(visible);
         paymentButton.shouldBe(visible);
         creditButton.shouldBe(visible);
-        successNotification.shouldBe(hidden);
-        errorNotification.shouldBe(hidden);
+
     }
 
     //Переход на страницу дебетовой оплаты

@@ -28,102 +28,106 @@ public class CreditTest {
         open(url);
     }
 
-    // Очистка БД
-    @AfterEach
-    public void cleanBase() {
-        SQLHelper.cleanDatabase();
-    }
-
     // **Перечень сценариев для вкладки "Купить в кредит"**
 
     // Оплата картой approved Card
     @Test
-    void shouldGetApprovedCard(){
+    void shouldGetApprovedCard() {
         var mainPage = new StartPage();
         var credit = mainPage.creditButtonClick();
-        credit.InputData(DataGenerator.getValidApprovedCard());
+        credit.inputData(DataGenerator.getValidApprovedCard());
         credit.notificationSuccessIsVisible();
         assertEquals("APPROVED", SQLHelper.getCreditPaymentStatus());
     }
+
     //Оплата картой Declined Card
     @Test
-    void shouldRejectPurchaseValidDeclinedCard(){
+    void shouldRejectPurchaseValidDeclinedCard() {
         var mainPage = new StartPage();
         var credit = mainPage.creditButtonClick();
-        credit.InputData(DataGenerator.getValidDeclinedCardNumber());
+        credit.inputData(DataGenerator.getValidDeclinedCardNumber());
         credit.notificationErrorIsVisible();
-        assertEquals("DECLINED", SQLHelper.getCreditPaymentStatus() );
+        assertEquals("DECLINED", SQLHelper.getCreditPaymentStatus());
     }
+
     // Оплата отсутствующей в условиях картой
     @Test
-    void shouldRejectPurchaseInvalidCard(){
+    void shouldRejectPurchaseInvalidCard() {
         var mainPage = new StartPage();
         var credit = mainPage.creditButtonClick();
-        credit.InputData(DataGenerator.getOutsiderCardNumber());
+        credit.inputData(DataGenerator.getOutsiderCardNumber());
         credit.notificationErrorIsVisible();
     }
+
     // Поле "Месяц" имеет значение предшествующее текущему
     @Test
-    void shouldDeclinePaymentCardMonthExpired(){
+    void shouldDeclinePaymentCardMonthExpired() {
         var mainPage = new StartPage();
         var credit = mainPage.creditButtonClick();
-        credit.InputData(DataGenerator.getValueLastMonth());
+        credit.inputData(DataGenerator.getValueLastMonth());
         credit.waitForWrongCardExpirationMessage();
     }
+
     // Формат месяца "00"
     @Test
-    void shouldRejectPaymentIfMonthHas00Value(){
+    void shouldRejectPaymentIfMonthHas00Value() {
         var mainPage = new StartPage();
         var credit = mainPage.creditButtonClick();
-        credit.InputData(DataGenerator.getInvalidMonth());
+        credit.inputData(DataGenerator.getInvalidMonth());
         credit.waitForWrongCardExpirationMessage();
     }
+
     // Карта просрочена
     @Test
-    void shouldDeclinePaymentCardYearExpired(){
+    void shouldDeclinePaymentCardYearExpired() {
         var mainPage = new StartPage();
         var credit = mainPage.creditButtonClick();
-        credit.InputData(DataGenerator.getValueLastYear());
+        credit.inputData(DataGenerator.getValueLastYear());
         credit.waitForCardExpiredMessage();
     }
+
     // Срок действия карты больше текущего на 7 лет
     @Test
-    void shouldRefuseToPayIfTheYearExceeds7Years(){
+    void shouldRefuseToPayIfTheYearExceeds7Years() {
         var mainPage = new StartPage();
         var credit = mainPage.creditButtonClick();
-        credit.InputData(DataGenerator.getValueYearMoreThanCurrent());
+        credit.inputData(DataGenerator.getValueYearMoreThanCurrent());
         credit.waitForWrongCardExpirationMessage();
     }
+
     // Поле "Владелец" заполнено кириллицей
     @Test
-    void shouldDeclinePaymentIfHolderRu(){
+    void shouldDeclinePaymentIfHolderRu() {
         var mainPage = new StartPage();
         var credit = mainPage.creditButtonClick();
-        credit.InputData(DataGenerator.getValueRuHolder());
+        credit.inputData(DataGenerator.getValueRuHolder());
         credit.waitForInvalidCharactersMessage();
     }
+
     // Поле "Владелец" заполнено только имя или только фамилия
     @Test
-    void shouldDeclinePaymentIfOwnerNameOnlyEn(){
+    void shouldDeclinePaymentIfOwnerNameOnlyEn() {
         var mainPage = new StartPage();
         var credit = mainPage.creditButtonClick();
-        credit.InputData(DataGenerator.getOneValueEnHolder());
+        credit.inputData(DataGenerator.getOneValueEnHolder());
         credit.waitForWrongFormatMessage();
     }
+
     // Пустое значение поля "Владелец"
     @Test
-    void shouldRejectPaymentIfOwnerEmpty(){
+    void shouldRejectPaymentIfOwnerEmpty() {
         var mainPage = new StartPage();
         var credit = mainPage.creditButtonClick();
-        credit.InputData(DataGenerator.getEmptyHolderCard());
+        credit.inputData(DataGenerator.getEmptyHolderCard());
         credit.waitForValidationFieldMessage();
     }
+
     // Двухзначное значения поля "CVC/CVV"
     @Test
-    void shouldDeclinePaymentIfCVCTwoDigitValue(){
+    void shouldDeclinePaymentIfCVCTwoDigitValue() {
         var mainPage = new StartPage();
         var credit = mainPage.creditButtonClick();
-        credit.InputData(DataGenerator.getValueInvalidCode());
+        credit.inputData(DataGenerator.getValueInvalidCode());
         credit.waitForWrongFormatMessage();
     }
 
